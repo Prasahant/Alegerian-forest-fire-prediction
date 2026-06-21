@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FWI Prediction</title>
+
+```
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Segoe UI',sans-serif;
+    }
+
+    body{
+        min-height:100vh;
+
+        background:
+        linear-gradient(
+            rgba(0,0,0,0.65),
+            rgba(0,0,0,0.65)
+        ),
+        url("https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=1600");
+
+        background-size:cover;
+        background-position:center;
+        background-attachment:fixed;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:20px;
+    }
+
+    .container{
+        width:100%;
+        max-width:700px;
+
+        background:rgba(255,255,255,0.12);
+        backdrop-filter:blur(15px);
+
+        border-radius:25px;
+        padding:35px;
+
+        box-shadow:0 8px 32px rgba(0,0,0,0.3);
+
+        animation:fadeUp 1s ease;
+    }
+
+    @keyframes fadeUp{
+        from{
+            opacity:0;
+            transform:translateY(40px);
+        }
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+
+    h1{
+        text-align:center;
+        color:white;
+        margin-bottom:25px;
+    }
+
+    .form-grid{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:15px;
+    }
+
+    input{
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+        outline:none;
+        font-size:15px;
+    }
+
+    input:focus{
+        box-shadow:0 0 10px rgba(255,255,255,0.6);
+    }
+
+    .btn{
+        width:100%;
+        margin-top:20px;
+        padding:14px;
+        border:none;
+        border-radius:10px;
+        background:#ff6b35;
+        color:white;
+        font-size:18px;
+        font-weight:bold;
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    .btn:hover{
+        background:#e85a28;
+        transform:translateY(-2px);
+    }
+
+    .result{
+        margin-top:25px;
+        padding:18px;
+        text-align:center;
+
+        background:rgba(255,255,255,0.15);
+        border-radius:12px;
+
+        color:white;
+        font-size:22px;
+        font-weight:bold;
+    }
+
+    .home-btn{
+        display:block;
+        width:fit-content;
+        margin:20px auto 0;
+
+        color:white;
+        text-decoration:none;
+        padding:10px 20px;
+
+        border:1px solid white;
+        border-radius:8px;
+
+        transition:0.3s;
+    }
+
+    .home-btn:hover{
+        background:white;
+        color:black;
+    }
+
+    @media(max-width:768px){
+
+        .form-grid{
+            grid-template-columns:1fr;
+        }
+
+        h1{
+            font-size:28px;
+        }
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<div class="container">
+
+    <h1>🔥 Fire Weather Index Prediction</h1>
+
+    <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+        <div class="form-grid">
+
+            <input type="text" name="Temperature"
+                placeholder="Temperature" required>
+
+            <input type="text" name="RH"
+                placeholder="Relative Humidity" required>
+
+            <input type="text" name="Ws"
+                placeholder="Wind Speed" required>
+
+            <input type="text" name="Rain"
+                placeholder="Rainfall" required>
+
+            <input type="text" name="FFMC"
+                placeholder="FFMC" required>
+
+            <input type="text" name="DMC"
+                placeholder="DMC" required>
+
+            <input type="text" name="ISI"
+                placeholder="ISI" required>
+
+            <input type="text" name="Classes"
+                placeholder="Classes" required>
+
+            <input type="text" name="Region"
+                placeholder="Region" required>
+
+        </div>
+
+        <button type="submit" class="btn">
+            <i class="fas fa-fire"></i>
+            Predict FWI
+        </button>
+
+    </form>
+
+    {% if results %}
+    <div class="result">
+        🔥 Predicted FWI : {{ results }}
+    </div>
+    {% endif %}
+
+    <a href="/" class="home-btn">
+        ← Back to Home
+    </a>
+
+</div>
+```
+
+</body>
+</html>
